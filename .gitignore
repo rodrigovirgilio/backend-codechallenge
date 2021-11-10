@@ -1,0 +1,17 @@
+# Ignore bundler config and other Ruby related files.
+.bundle
+.byebug_history
+
+# Ignore all logfiles and tempfiles.
+log/*
+tmp/*
+!log/.keep
+!tmp/.keep
+
+# Ignore uploaded files in development.
+storage/*
+!storage/.keep
+
+# ignore shell dotfiles
+.bash_history
+.irb_history

@@ -1,0 +1,56 @@
+version: "3"
+
+services:
+  web:
+    build: .
+    working_dir: /app
+    command: bash -c "rails db:migrate:reset && puma -C config/puma.rb"
+    env_file:
+      - ".env"
+    ports:
+      - 8000:8000
+    volumes:
+      - '.:/app'
+    depends_on:
+      - postgres
+      - redis
+      - worker
+
+  console:
+    build: .
+    working_dir: /app
+    command: bash
+    env_file:
+      - ".env"
+    ports:
+      - 8000:8000
+    volumes:
+      - '.:/app'
+    depends_on:
+      - postgres
+      - redis
+      - worker
+
+  worker:
+    build: .
+    command: "sidekiq -C config/sidekiq.yml"
+    env_file:
+      - ".env"
+    volumes:
+      - '.:/app'
+    depends_on:
+      - postgres
+      - redis
+
+  redis:
+    image: redis
+    expose:
+      - 6379
+
+  postgres:
+    image: postgres:alpine
+    ports:
+      - 5432:5432
+    environment:
+      # User: postgres / No password
+      POSTGRES_HOST_AUTH_METHOD: 'trust'
