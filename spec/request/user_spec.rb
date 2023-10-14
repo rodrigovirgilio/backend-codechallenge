@@ -1,19 +1,62 @@
-RSpec.describe 'User', type: :request do
-  describe "PUT /api/v1/questions/:id" do
+require "rails_helper"
 
-    it 'returns success' do
-      post "/api/v1/users", params: { first_name: 'Quim', last_name: 'Barreiros', admin: true }
+RSpec.describe "Api::V1::Users", type: :request do
+  describe "POST /create" do
+    let(:user) { create(:user) }
+    let(:authentication) { create(:authentication) }
 
-      expect(response.status).to eq(201)
-      # ....
+    context "with valid parameters" do
+      let(:user_params) do
+        {
+          first_name: user.first_name,
+          last_name: user.last_name
+        }
+      end
 
+      before do
+        post "/api/v1/users",
+          params: user_params, headers: { Authorization: authentication.token }
+      end
+
+      it "returns a created status" do
+        expect(response).to have_http_status(:created)
+      end
     end
 
-    it 'returns error' do
-      post "/api/v1/users", params: { first_name: '', last_name: '', admin: true }
+    context "with invalid parameters" do
+      let(:user_params) do
+        {
+          first_name: nil,
+          last_name: nil
+        }
+      end
 
-      expect(response.status).to eq(422)
-      # ....
+      before do
+        post "/api/v1/users",
+          params: user_params, headers: { Authorization: authentication.token }
+      end
+
+      it "returns an unprocessable entity status" do
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+    end
+  end
+
+  describe "when authentication token is not valid" do
+    let(:user) { create(:user) }
+
+    let(:user_params) do
+      {
+        first_name: user.first_name,
+        last_name: user.last_name
+      }
+    end
+
+    it "invalid token" do
+      post "/api/v1/users",
+        params: user_params, headers: { Authorization: "1234" }
+
+      expect(response).to have_http_status(:unauthorized)
     end
   end
 end
