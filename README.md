@@ -62,8 +62,7 @@ You can also check sidekiq admin through:
   fd4bb99af1988ba52deb7ff2d7517ac6
 ```
 
-
--> image
+![Screenshot 2023-10-14 at 17 20 19](https://github.com/rodrigovirgilio/backend-codechallenge/assets/392677/d016febe-6bf1-43bf-a8f9-17fc190aaf05)
 
 
 ### 2) Or by terminal
@@ -88,14 +87,21 @@ curl --request POST \
 
 #### 201 - Created
 
---> image
+![Screenshot 2023-10-14 at 17 23 15](https://github.com/rodrigovirgilio/backend-codechallenge/assets/392677/04a89bd6-e453-460a-a55e-05eb14bb1862)
+
+
 #### 401 - Unauthorized
 
---> image
+![Screenshot 2023-10-14 at 17 23 31](https://github.com/rodrigovirgilio/backend-codechallenge/assets/392677/1251a0cc-049b-4a26-81e3-1dc95d64abae)
+
+
 #### 422 - Unprocessable Entity
 
---> image
+![Screenshot 2023-10-14 at 17 23 42](https://github.com/rodrigovirgilio/backend-codechallenge/assets/392677/093a5874-1a57-45bb-965a-0ac4bd726a7c)
+
 
 ## Documentation API - http://localhost:8000/api-doc
 
---> images
+![Screenshot 2023-10-14 at 17 26 12](https://github.com/rodrigovirgilio/backend-codechallenge/assets/392677/78bc210d-d4a3-4318-a469-67c766f85e48)
+![Screenshot 2023-10-14 at 17 26 04](https://github.com/rodrigovirgilio/backend-codechallenge/assets/392677/6dda222b-1c21-4bed-86d0-7b8a64feb712)
+
