@@ -19,3 +19,7 @@ gem 'factory_bot_rails'
 gem 'faker'
 # API Doc generator
 gem 'apipie-rails', '~> 1.2', '>= 1.2.2'
+
+group :test do
+  gem 'rspec-sidekiq', '~> 4.0', '>= 4.0.2'
+end
