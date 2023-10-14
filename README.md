@@ -43,3 +43,59 @@ $ curl -v -X POST 'http://127.0.0.1:8000/api/v1/users' -d '{"first_name": "Quim"
 
 You can also check sidekiq admin through:
 `http://127.0.0.1:8000/sidekiq`
+
+
+# Validate the challenge
+
+## Rake to generate token for API authentication:
+```ruby
+  $ bundle exec rails generate_token:authenticate
+```
+## Steps to perform the tasks
+
+## Generate token for API authentication in terminal:
+
+### 1) By rake task
+```ruby
+  $ bundle exec rake generate_token:authenticate
+  Authentication successfully created
+  fd4bb99af1988ba52deb7ff2d7517ac6
+```
+
+
+-> image
+
+
+### 2) Or by terminal
+```ruby
+  $ bundle exec rails c
+  $ auth = Authentication.create(name: "Authentication", token: SecureRandom.hex)
+  auth.token
+  "fd4bb99af1988ba52deb7ff2d7517ac6"
+```
+
+## User management by API:
+
+### API Create User
+### Post /api/v1/users
+
+```bash
+curl --request POST \
+  --url 'http://localhost:8000/api/v1/users?first_name=First%20Name&last_name=Last%20Name' \
+  --header 'Authorization: fd4bb99af1988ba52deb7ff2d7517ac6' \
+  --header 'Content-Type: application/json'
+```
+
+#### 201 - Created
+
+--> image
+#### 401 - Unauthorized
+
+--> image
+#### 422 - Unprocessable Entity
+
+--> image
+
+## Documentation API - http://localhost:8000/api-doc
+
+--> images
