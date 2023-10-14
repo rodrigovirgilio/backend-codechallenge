@@ -17,3 +17,5 @@ gem 'shoulda-matchers'
 gem 'database_cleaner'
 gem 'factory_bot_rails'
 gem 'faker'
+# API Doc generator
+gem 'apipie-rails', '~> 1.2', '>= 1.2.2'
