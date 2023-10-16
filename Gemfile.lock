@@ -60,6 +60,9 @@ GEM
       minitest (>= 5.1)
       tzinfo (~> 2.0)
       zeitwerk (~> 2.3)
+    apipie-rails (1.2.3)
+      actionpack (>= 5.0)
+      activesupport (>= 5.0)
     builder (3.2.4)
     concurrent-ruby (1.1.9)
     connection_pool (2.2.5)
@@ -146,6 +149,11 @@ GEM
       rspec-expectations (~> 3.10)
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
+    rspec-sidekiq (4.0.2)
+      rspec-core (~> 3.0)
+      rspec-expectations (~> 3.0)
+      rspec-mocks (~> 3.0)
+      sidekiq (>= 5, < 8)
     rspec-support (3.10.3)
     shoulda-matchers (5.0.0)
       activesupport (>= 5.2.0)
@@ -172,6 +180,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  apipie-rails (~> 1.2, >= 1.2.2)
   database_cleaner
   factory_bot_rails
   faker
@@ -179,6 +188,7 @@ DEPENDENCIES
   puma (= 5.4.0)
   rails (= 6.1.4.1)
   rspec-rails
+  rspec-sidekiq (~> 4.0, >= 4.0.2)
   shoulda-matchers
   sidekiq (~> 6.2.1)
 

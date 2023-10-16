@@ -43,3 +43,86 @@ $ curl -v -X POST 'http://127.0.0.1:8000/api/v1/users' -d '{"first_name": "Quim"
 
 You can also check sidekiq admin through:
 `http://127.0.0.1:8000/sidekiq`
+
+
+# Validate the challenge
+
+## Rake to generate token for API authentication:
+```ruby
+  $ bundle exec rails generate_token:authenticate
+```
+## Steps to perform the tasks
+
+## Generate token for API authentication in terminal:
+
+### 1) By rake task
+```ruby
+  $ bundle exec rake generate_token:authenticate
+  Authentication successfully created
+  fd4bb99af1988ba52deb7ff2d7517ac6
+```
+
+![Screenshot 2023-10-14 at 17 20 19](https://github.com/rodrigovirgilio/backend-codechallenge/assets/392677/d016febe-6bf1-43bf-a8f9-17fc190aaf05)
+
+
+### 2) Or by terminal
+```ruby
+  $ bundle exec rails c
+  $ auth = Authentication.create(name: "Authentication", token: SecureRandom.hex)
+  auth.token
+  "fd4bb99af1988ba52deb7ff2d7517ac6"
+```
+
+## User management by API:
+
+### API Create User
+### POST /api/v1/users
+
+```bash
+curl --request POST \
+  --url 'http://localhost:8000/api/v1/users?first_name=First%20Name&last_name=Last%20Name' \
+  --header 'Authorization: fd4bb99af1988ba52deb7ff2d7517ac6' \
+  --header 'Content-Type: application/json'
+```
+
+#### 201 - Created
+
+![Screenshot 2023-10-14 at 17 23 15](https://github.com/rodrigovirgilio/backend-codechallenge/assets/392677/04a89bd6-e453-460a-a55e-05eb14bb1862)
+
+
+#### 401 - Unauthorized
+
+![Screenshot 2023-10-14 at 17 23 31](https://github.com/rodrigovirgilio/backend-codechallenge/assets/392677/1251a0cc-049b-4a26-81e3-1dc95d64abae)
+
+
+#### 422 - Unprocessable Entity
+
+![Screenshot 2023-10-14 at 17 23 42](https://github.com/rodrigovirgilio/backend-codechallenge/assets/392677/093a5874-1a57-45bb-965a-0ac4bd726a7c)
+
+
+### API List users
+### GET /api/v1/users
+
+```bash
+curl --request GET \
+  --url http://localhost:8000/api/v1/users \
+  --header 'Authorization: afefb430a52f4de50350e57068e25837' \
+  --header 'Content-Type: application/json'
+```
+
+#### 200 - OK
+
+![Screenshot 2023-10-16 at 13 41 38](https://github.com/rodrigovirgilio/backend-codechallenge/assets/392677/679996e5-46ca-4a23-b95c-013a14cc5d4a)
+
+
+#### 401 - Unauthorized
+
+![Screenshot 2023-10-16 at 13 41 53](https://github.com/rodrigovirgilio/backend-codechallenge/assets/392677/127a17f3-c84f-48e2-9616-eb7a21d70227)
+
+
+## Documentation API - http://localhost:8000/api-doc
+
+![Screenshot 2023-10-16 at 13 55 27](https://github.com/rodrigovirgilio/backend-codechallenge/assets/392677/7c923a63-79f7-489e-9368-250fd3e95ac7)
+![Screenshot 2023-10-16 at 13 52 31](https://github.com/rodrigovirgilio/backend-codechallenge/assets/392677/1c84cc4a-2a99-4da8-81f5-0d350fc5a552)
+![Screenshot 2023-10-16 at 13 52 16](https://github.com/rodrigovirgilio/backend-codechallenge/assets/392677/9eca491a-8f4d-4fb6-9364-d83d692f72b1)
+
