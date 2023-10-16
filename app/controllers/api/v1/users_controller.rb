@@ -13,6 +13,14 @@ class Api::V1::UsersController < Api::V1::ApplicationController
     end
   end
 
+  api :GET, "/v1/users", "List of Users"
+  param_group :user_controller_index, Docs::UsersControllerDoc
+  def index
+    @users = User.all
+
+    render json: @users, status: :ok
+  end
+
   private
 
   def user_params

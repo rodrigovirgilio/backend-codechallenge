@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       # returns API status
       # only used for tests atm
       get 'ping', to: 'ping#ping'
-      resources :users, only: :create
+      resources :users, only: %i[create index]
     end
   end
 end

@@ -42,6 +42,23 @@ RSpec.describe "Api::V1::Users", type: :request do
     end
   end
 
+  describe "GET /index" do
+    let(:user) { create(:user) }
+    let(:authentication) { create(:authentication) }
+
+    it "returns a ok status" do
+      get "/api/v1/users", headers: { Authorization: authentication.token }
+
+      expect(response).to have_http_status(:ok)
+    end
+
+    it "invalid token" do
+      get "/api/v1/users", headers: { Authorization: "1234" }
+
+      expect(response).to have_http_status(:unauthorized)
+    end
+  end
+
   describe "when authentication token is not valid" do
     let(:user) { create(:user) }
 
